@@ -1,0 +1,58 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="Todos" ba-panel-class="with-scroll">
+                <div class="horizontal-scroll">
+                    <div class="form-group select-page-size-wrap">
+                        <label>Rows on page
+                            <select class="form-control " title="Rows on page" selectpicker
+                                    ng-model="$ctrl.smartTablePageSize" ng-options="i for i in [5,10,15,20,25]">
+                            </select>
+                        </label>
+                        <a href ng-click="$ctrl.openTodoManage({})" class="btn btn-primary">Add</a>
+                    </div>
+                    <table class="table" st-pipe="$ctrl.callServer" st-table="$ctrl.smartTableData">
+                        <thead>
+                        <tr class="sortable ">
+                            <th st-sort="name">Name</th>
+                            <th st-sort="description">Description</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <th><input st-search="name" placeholder="Search Name"
+                                       class="input-sm form-control search-input"
+                                       type="search"/></th>
+                            <th><input st-search="description" placeholder="Search Description"
+                                       class="input-sm form-control search-input"
+                                       type="search"/></th>
+                            </th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in $ctrl.smartTableData">
+                            <td>{{item.name}}</td>
+                            <td>{{item.description}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-icon"
+                                        ng-click="$ctrl.openTodoManage(item)" title="Edit"><i class="ion-edit"></i></button>
+                                <button class="btn btn-danger btn-icon"
+                                        ng-click="$ctrl.removeTodo(item._id)" title="Delete"><i class="ion-android-delete"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <div st-pagination st-items-by-page="$ctrl.smartTablePageSize"
+                                     st-displayed-pages="5"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
